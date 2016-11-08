@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,6 +24,8 @@ import javax.persistence.Temporal;
 
 //@Entity
 //@Table(name = "QUOTES")
+@RequestScoped
+@Named
 public class Quote implements Serializable {
 
     @Id

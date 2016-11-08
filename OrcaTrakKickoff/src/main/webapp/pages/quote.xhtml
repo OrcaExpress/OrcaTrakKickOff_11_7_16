@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>OrcaTrak - Quote</title>
+        <h:outputStylesheet library="orcatrak" name="css/quote.css"/>
+    </h:head>
+    <h:body>
+        <ui:decorate template="../template/layout.xhtml">                        
+
+            <!-- skip subtitle sections -->
+            <ui:param name="subtitle" value="false"/>
+
+            <!-- skip intro but define header -->
+            <ui:param name="intro" value="false"/>
+            <ui:define name="mainheader">
+                <!--<h4>OrcaTrak Header</h4>-->
+            </ui:define>   
+
+            <!-- skip menu -->
+            <ui:param name="topmenu" value="false"/>
+
+            <!-- skip left and right panels (the central panel cannot be skipped) -->
+            <ui:param name="leftpanel" value="false"/>
+            <ui:param name="rightpanel" value="false"/>
+
+            <!-- define title -->
+            <ui:define name="title">
+                <h2>OrcaTrak</h2>
+            </ui:define>           
+
+            <!-- define footer -->
+            <ui:define name="mainfooter">
+                OrcaTrak Footer           
+            </ui:define>   
+
+            <!-- define center panel content -->
+            <ui:define name="centerpanel"> 
+
+                <h:form>
+                    <p:fieldset legend="Origin" toggleable="true" toggleSpeed="500">
+                        <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" update="msgs" />
+                        <h:panelGrid columns="5" cellpadding="5">
+
+                            <p:inputText id="origin" value="#{quote.originZip}" placeholder="zipcode" required="true" requiredMessage="zip code required"/>
+
+                            <p:outputLabel value="Zoning"/>
+                            <p:selectOneButton value="#{selectOneView.option}">
+                                <f:selectItem itemLabel="Business" itemValue="Business" />
+                                <f:selectItem itemLabel="Residential" itemValue="Residential" />
+                            </p:selectOneButton>
+
+                            <p:outputLabel for="date" value="Date:" />
+                            <p:calendar id="date" value="#{calendarView.date3}" showOn="button" />
+
+                            <p:outputLabel for="otherrestrictions" value="Pickups with restrictive access:" />
+                            <p:selectOneMenu id="otherrestrictions" value="#{selectOneMenuView.console}" style="width:125px">
+                                <f:selectItem itemLabel="Select One" itemValue="" />
+                                <f:selectItem itemLabel="Airport" itemValue="Airport" />
+                                <f:selectItem itemLabel="Construction Site" itemValue="Construction Zone" />
+                                <f:selectItem itemLabel="Hazardous Material" itemValue="Hazardous Material" />
+                                <f:selectItem itemLabel="Trade Show" itemValue="Hazardous Material" />
+                                <f:selectItem itemLabel="School" itemValue="School" />
+                                <f:selectItem itemLabel="Strip Mall" itemValue="Strip Malls" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Services"/>
+                            <p:selectManyButton value="#{selectManyView.selectedOptions}">
+                                <f:selectItem itemLabel="Lift Gate" itemValue="Lift Gate" />
+                                <f:selectItem itemLabel="Inside Pickup" itemValue="Inside Pickup" />
+                            </p:selectManyButton>
+
+                        </h:panelGrid>
+                    </p:fieldset>
+
+                    <p:fieldset legend="Destination" toggleable="true" toggleSpeed="500">
+                        <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" update="msgs" />
+                        <h:panelGrid columns="2" cellpadding="5">
+
+                        </h:panelGrid>
+                    </p:fieldset>
+
+
+                    <p:fieldset legend="Shipment Items" toggleable="true" toggleSpeed="500">
+                        <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" update="msgs" />
+                        <h:panelGrid columns="2" cellpadding="5">
+
+                        </h:panelGrid>
+                    </p:fieldset>
+
+
+                </h:form>
+
+
+
+
+            </ui:define>
+    </h:body>
+</html>
+
